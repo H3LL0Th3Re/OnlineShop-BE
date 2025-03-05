@@ -6,10 +6,11 @@ app.use(express.json()); // Middleware to parse JSON requests
 dotenv.config();
 
 // Initialize Midtrans Snap client
+// console.log("server key:",process.env.CLIENT_KEY);
 const snap = new MidtransClient.Snap({
   isProduction: false,
-  serverKey: process.env.CLIENT_KEY, // Replace with your Midtrans server key
-  clientKey: process.env.SERVER_KEY, // Replace with your Midtrans client key
+  serverKey: process.env.SERVER_KEY, // Replace with your Midtrans server key
+  clientKey: process.env.CLIENT_KEY, // Replace with your Midtrans client key
 });
 
 // Define the POST endpoint
@@ -19,6 +20,10 @@ export default async function createTransaction(req: Request, res: Response) {
     const { id, productName, price, quantity, service_charge, shipment } =
       req.body;
     const amount = price * quantity + service_charge + shipment;
+    
+    if(!id || !productName || !price || !quantity || !service_charge || !shipment){
+      res.status(400).json({message: "error not enough data"})
+    }
 
     // Construct parameter object for Midtrans
 

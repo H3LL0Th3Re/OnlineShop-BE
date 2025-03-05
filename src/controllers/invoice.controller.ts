@@ -26,6 +26,8 @@ export async function createInvoice(req: Request, res: Response) {
     order_id,
   } = req.body;
 
+  console.log("invoice called");
+
   try {
     const findStore = prisma.stores.findUnique({
       where: { id: storesId },

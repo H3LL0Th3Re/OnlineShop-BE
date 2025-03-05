@@ -28,7 +28,7 @@ export const updateOrder = async (req: Request, res: Response) => {
       },
     });
 
-    console.log('response dari get draft order: ', get_draft_order);
+    // console.log('response dari get draft order: ', get_draft_order);
 
     const orderPayload = {
       // origin_contact_name: orderData.origin_contact_name || get_draft_order.data.origin.contact_name,
@@ -56,7 +56,7 @@ export const updateOrder = async (req: Request, res: Response) => {
       order_note: 'please be Careful',
     };
 
-    console.log('Order item:', orderItem); // ✅ Log the item to debug
+    // console.log('Order item:', orderItem); // ✅ Log the item to debug
 
     // Make API request to Biteship
     const apiBiteship = `https://api.biteship.com/v1/draft_orders/${orderid}`;
@@ -68,7 +68,7 @@ export const updateOrder = async (req: Request, res: Response) => {
     });
 
     const data = biteship.data;
-    console.log(data);
+    // console.log(data);
     // You can now store this order information in your database if needed
     res.status(201).json({
       message: 'draft order updated successfully!',
@@ -258,7 +258,7 @@ export const retrieveEmailOrder = async (req: Request, res: Response) => {
         destination_email: true,
       },
     });
-    console.log(response);
+    // console.log(response);
     res.status(200).json({ message: 'success', data_response: response });
   } catch (error) {
     res.status(500).json({ message: 'error retrieve email ', error });
